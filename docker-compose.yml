@@ -1,0 +1,29 @@
+version: '3'
+services:
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.0.1
+    ports:
+      - "5000:5000"
+    environment:
+      - BACKEND_STORE_URI=sqlite:////mlflow/mlflow.db  
+    volumes:
+      - ./mlflow:/mlflow
+
+  mlflow_db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: mlflow
+      POSTGRES_USER: mlflow
+      POSTGRES_PASSWORD: mlflow
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data  
+
+  dag_pipeline:
+    image: ecr_image_repo
+    restart: always
+    environment:
+      - AWS_ACCESS_KEY_ID=value
+      - AWS_SECRET_ACCESS_KEY=value
+      - AWS_REGION=ap-south-1
+      - 
+    command: ./start.sh

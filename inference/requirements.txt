@@ -1,0 +1,4 @@
+flair
+boto3
+fastapi
+uvicorn

@@ -1,0 +1,8 @@
+flair
+pandas
+pymongo
+numpy
+scikit-learn
+apache-airflow
+kubernetes
+mlflow
